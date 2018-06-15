@@ -5,10 +5,18 @@ using System.Linq;
 
 namespace Api_Livraria.Controllers.v1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/publico/v1/livro")]
     public class LivroController : ControllerBase
     {
         private static List<livro> _listaLivro;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<livro> ListaLivro
         {
             get
@@ -21,18 +29,30 @@ namespace Api_Livraria.Controllers.v1
             }
         }
 
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
         [HttpGet, Route("")]
         public ActionResult Get()
         {
             return Ok(ListaLivro);
         }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="isbn"></param>
+/// <returns></returns>
         [HttpGet, Route("{isbn}")]
         public ActionResult Get(string isbn)
         {
             return Ok(ListaLivro.Where(x => x.isbn.ToLower() == isbn.ToLower()));
         }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="parametro"></param>
+/// <returns></returns>
         [HttpPost, Route("")]
         public ActionResult Post([FromBody] livro parametro)
         {
@@ -43,7 +63,12 @@ namespace Api_Livraria.Controllers.v1
             ListaLivro.Add(parametro);
             return Ok("Cadastrado!");
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <param name="descricao"></param>
+        /// <returns></returns>
         [HttpPost, Route("comentario")]
         public ActionResult Post([FromBody] string isbn, [FromBody] string descricao)
         {

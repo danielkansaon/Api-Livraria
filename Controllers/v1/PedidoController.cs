@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Livraria.Controllers.v1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/publico/v1/pedido")]
     public class PedidoController : ControllerBase
     {
@@ -20,7 +23,14 @@ namespace Api_Livraria.Controllers.v1
             }
         }
 
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="isbn"></param>
+/// <param name="idusuario"></param>
+/// <param name="datainicio"></param>
+/// <param name="datafim"></param>
+/// <returns></returns>
         [HttpPost, Route("")]
         public IActionResult Post(string isbn, long idusuario, DateTime datainicio, DateTime datafim)
         {
@@ -49,7 +59,11 @@ namespace Api_Livraria.Controllers.v1
 
             return Ok(ListaPedido.Count);
         }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="idpedido"></param>
+/// <returns></returns>
         [HttpGet, Route("{idpedido}")]
         public IActionResult Get(long idpedido)
         {
