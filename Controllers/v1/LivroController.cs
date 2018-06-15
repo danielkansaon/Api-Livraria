@@ -21,7 +21,6 @@ namespace Api_Livraria.Controllers.v1
             }
         }
 
-
         [HttpGet, Route("")]
         public ActionResult Get()
         {
@@ -43,6 +42,21 @@ namespace Api_Livraria.Controllers.v1
             
             ListaLivro.Add(parametro);
             return Ok("Cadastrado!");
+        }
+        
+        [HttpPost, Route("comentario")]
+        public ActionResult Post([FromBody] string isbn, [FromBody] string descricao)
+        {
+          livro livro = ListaLivro.Find(x => x.isbn.ToUpper() == isbn.ToUpper());
+
+          if(livro == null){
+              return BadRequest("Código isbn inválido para o livro");
+          }
+
+          ListaLivro.Find(x => x.isbn.ToUpper() == isbn.ToUpper())
+          .comentarios.Add(new comentario(){ descricao = descricao});
+
+          return Ok("Comentário adicionado");
         }
     }
 }
