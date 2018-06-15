@@ -6,64 +6,65 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api_Livraria.Controllers.v1
 {
     /// <summary>
-    /// 
+    /// Recurso para gerenciamento de pedido de livros
     /// </summary>
     [Route("api/publico/v1/pedido")]
     public class PedidoController : ControllerBase
     {
-        private static List<pedido> _listaPedido;
-        private static List<pedido> ListaPedido
+        private static List<pedido_model> _listaPedido;
+        private static List<pedido_model> ListaPedido
         {
             get
             {
                 if (_listaPedido == null)
-                    _listaPedido = new List<pedido>();
+                    _listaPedido = new List<pedido_model>();
 
                 return _listaPedido;
             }
         }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="isbn"></param>
-/// <param name="idusuario"></param>
-/// <param name="datainicio"></param>
-/// <param name="datafim"></param>
-/// <returns></returns>
+        /// <summary>
+        /// Realiza uma reserva de um livro
+        /// </summary>
+        /// <param name="pedido"></param>
+        /// <returns></returns>
+        [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(400),
+        ProducesResponseType(404)]
         [HttpPost, Route("")]
-        public IActionResult Post(string isbn, long idusuario, DateTime datainicio, DateTime datafim)
+        public IActionResult Post([FromBody] pedido_model pedido)
         {
-            livro pLivro = LivroController.ListaLivro.Find(x => x.isbn.ToUpper() == isbn.ToUpper());
+            livro_model pLivro = LivroController.ListaLivro.Find(x => x.isbn.ToUpper() == pedido.livro.isbn.ToUpper());
 
             if (pLivro != null)
             {
-                if (ListaPedido.Exists(x => (x.livros.isbn.ToUpper() == isbn.ToUpper())
-                              && datainicio < x.DataInicio))
+                if (ListaPedido.Exists(x => (x.livro.isbn.ToUpper() == pLivro.isbn.ToUpper())
+                              && pedido.datainicio < x.datainicio))
                 {
                     return BadRequest("Data inválida");
                 }
 
-                ListaPedido.Add(new pedido()
+                ListaPedido.Add(new pedido_model()
                 {
                     idpedido = ListaPedido.Count,
-                    livros = pLivro,
-                    DataInicio = datainicio,
-                    DataFim = datafim
+                    livro = pLivro,
+                    datainicio = pedido.datainicio,
+                    datafim = pedido.datafim
                 });
             }
             else
             {
-                return NotFound("Isbn não encontrado");
+                return NotFound("ISBN não encontrado");
             }
 
             return Ok(ListaPedido.Count);
         }
-/// <summary>
-/// 
-/// </summary>
-/// <param name="idpedido"></param>
-/// <returns></returns>
+
+        /// <summary>
+        /// Retorn uma reserva já realizada
+        /// </summary>
+        /// <param name="idpedido">Id da reserva</param>
+        /// <returns></returns>
+         [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(404)]
         [HttpGet, Route("{idpedido}")]
         public IActionResult Get(long idpedido)
         {

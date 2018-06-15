@@ -35,34 +35,26 @@ namespace Api_Livraria
                string basePath = AppContext.BaseDirectory;
                string moduleName = GetType().GetTypeInfo().Module.Name.Replace(".dll", ".xml");
                string filePath = Path.Combine(basePath, moduleName);
-               //string readme = File.ReadAllText(Path.Combine(basePath, "README.md"));
 
                ApiKeyScheme scheme = Configuration.GetSection("ApiKeyScheme").Get<ApiKeyScheme>();
                options.AddSecurityDefinition("Authentication", scheme);
 
                Info info = Configuration.GetSection("Info").Get<Info>();
-               // info.Description = readme;
-               // options.SwaggerDoc(info.Version, info);
-
+            
                options.IncludeXmlComments(filePath);
                options.DescribeAllEnumsAsStrings();
 
                options.SwaggerDoc("v1",
                    new Info
                    {
-                       Title = "Trabalho de Arquitetura Backend - Aula 02",
+                       Title = "Api - Livraria",
                        Version = "v1",
-                       Description = "Implementação de WebApi com documentação em DotNet Core",
+                       Description = "Api desenvolvida na Pós graduação em arquitetura de software. A WebApi em .Net Core consiste em rotas básicas que simulam o funcionamento de uma livraria.",
                        TermsOfService = "None",
                        Contact = new Contact
                        {
-                           Name = "Flávio Pedrosa",
-                           Url = "https://github.com/flaviopedrosa"
-                       },
-                       License = new License
-                       {
-                           Name = "GPL",
-                           Url = "https://example.com/license"
+                           Name = "Daniel Pimentel",
+                           Url = "https://github.com/danielkansaon/Api-Livraria"
                        }
                    });
                // options.OperationFilter<ExamplesOperationFilter>();

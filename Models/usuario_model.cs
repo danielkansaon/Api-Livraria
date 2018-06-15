@@ -5,7 +5,7 @@ namespace Api_Livraria.Models
     /// <summary>
     /// 
     /// </summary>
-    public class usuario
+    public class usuario_model
     {
         public long idusuario { get; set; }
     }
