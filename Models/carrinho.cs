@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace Api_Livraria.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class carrinho
     {
         public long idcarrinho { get; set; }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Api_Livraria.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class pedido
     {
         public long idpedido { get; set; }
