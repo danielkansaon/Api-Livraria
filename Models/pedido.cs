@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Api_Livraria.Models
@@ -5,6 +6,10 @@ namespace Api_Livraria.Models
     public class pedido
     {
         public long idpedido { get; set; }
-        public List<livro> livros { get; set; }
+        public livro livros { get; set; }
+
+        public DateTime DataInicio { get; set; }
+
+        public DateTime DataFim { get; set; }
     }
 }

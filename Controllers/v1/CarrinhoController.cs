@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Api_Livraria.Controllers.v1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/publico/v1/carrinho")]
     public class CarrinhoController : ControllerBase
     {
@@ -20,7 +23,11 @@ namespace Api_Livraria.Controllers.v1
                 return _listaCarrinho;
             }
         }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="user"></param>
+/// <returns></returns>
         [HttpPost, Route("")]
         public IActionResult Post([FromBody] usuario user)
         {
@@ -28,6 +35,12 @@ namespace Api_Livraria.Controllers.v1
             return Ok(ListaCarrinho.Count - 1);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idcarrinho"></param>
+        /// <param name="isbn"></param>
+        /// <returns></returns>
         [HttpPost, Route("{idcarrinho}/item")]
         public IActionResult Post(int idcarrinho, [FromBody] string isbn)
         {
@@ -41,6 +54,11 @@ namespace Api_Livraria.Controllers.v1
             return Ok("Cadastrado!");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idcarrinho"></param>
+        /// <returns></returns>
         [HttpGet, Route("{idcarrinho}/item")]
         public IActionResult Get(int idcarrinho)
         {

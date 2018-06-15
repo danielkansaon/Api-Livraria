@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api-Livraria</name>
+    </assembly>
+    <members>
+        <member name="T:Api_Livraria.Controllers.v1.CarrinhoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.CarrinhoController.Post(Api_Livraria.Models.usuario)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.CarrinhoController.Post(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="idcarrinho"></param>
+            <param name="isbn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.CarrinhoController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idcarrinho"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api_Livraria.Controllers.v1.LivroController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Api_Livraria.Controllers.v1.LivroController.ListaLivro">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.LivroController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.LivroController.Get(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isbn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.LivroController.Post(Api_Livraria.Models.livro)">
+            <summary>
+            
+            </summary>
+            <param name="parametro"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.LivroController.Post(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isbn"></param>
+            <param name="descricao"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api_Livraria.Controllers.v1.PedidoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.PedidoController.Post(System.String,System.Int64,System.DateTime,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="isbn"></param>
+            <param name="idusuario"></param>
+            <param name="datainicio"></param>
+            <param name="datafim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api_Livraria.Controllers.v1.PedidoController.Get(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="idpedido"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
