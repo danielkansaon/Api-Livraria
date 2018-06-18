@@ -11,9 +11,10 @@ namespace Api_Livraria.Controllers.v1
     [Route("api/publico/v1/entrega")]
     public class EntregaController : ControllerBase
     {
-        [HttpPost, Route("")]
-        public ActionResult Post()
+        [HttpPost, Route("{idpedido}")]
+        public ActionResult Post(long idPedido)
         {
+            
             return Ok("Entregue!");
         }
     }

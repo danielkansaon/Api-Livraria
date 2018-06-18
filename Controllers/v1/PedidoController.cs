@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Api_Livraria.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Api_Livraria.Controllers.v1
 {
@@ -64,11 +65,28 @@ namespace Api_Livraria.Controllers.v1
         /// </summary>
         /// <param name="idpedido">Id da reserva</param>
         /// <returns></returns>
-         [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(404)]
+        [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(404)]
         [HttpGet, Route("{idpedido}")]
         public IActionResult Get(long idpedido)
         {
             return Ok(ListaPedido.Find(x => x.idpedido == idpedido));
+        }
+
+        /// <summary>
+        /// Retorna um pedido realizado
+        /// </summary>
+        /// <param name="idpedido"></param>
+        /// <returns></returns>
+        [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(404)]
+        [HttpGet, Route("{idpedido}/entrega")]
+        public IActionResult Post(long idpedido)
+        {
+            var pedido = ListaPedido.FirstOrDefault(x => x.idpedido == idpedido);
+
+            if (pedido != null)
+                ListaPedido.Remove(pedido);
+
+            return Ok("Finalizado!");
         }
     }
 }
