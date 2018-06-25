@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Api_Livraria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System;
 
 namespace Api_Livraria.Controllers.v1
 {
@@ -11,7 +12,10 @@ namespace Api_Livraria.Controllers.v1
     [Route("api/publico/v1/carrinho")]
     public class CarrinhoController : ControllerBase
     {
-        private const string API_AUTENTICACAO = " http://localhost:5000/publico/v1/credencial/";
+        private const string API_AUTENTICACAO = "http://localhost:5000/publico/v1/credencial/";
+        private const string API_CARTAO_CREDITO = "http://localhost:5000/publico/v1/cartao/";
+        private const string API_AUDITORIA = "http://localhost:5000/publico/v1/auditoria/";
+
         private static List<carrinho_model> _listaCarrinho;
         private static List<carrinho_model> ListaCarrinho
         {
@@ -84,10 +88,63 @@ namespace Api_Livraria.Controllers.v1
             return Ok(ListaCarrinho[idcarrinho - 1].itens);
         }
 
+        /// <summary>
+        /// Finalizar a compra dos livros
+        /// </summary>
+        /// <param name="idcarrinho">Id do carrinho</param>
+        /// <param name="numerocartao">Número do cartão de crédito</param>
+        /// <returns></returns>
+        [ProducesResponseType(200), ProducesResponseType(500), ProducesResponseType(404)]
+        [HttpPost, Route("{idcarrinho}/finalizar")]
+        public IActionResult Post(int idcarrinho, int numerocartao)
+        {
+            if (ListaCarrinho.Count - 1 < idcarrinho || idcarrinho < 0)
+                return BadRequest("O parametro não representa um código de carrinho válido.");
+
+            if (AutorizarCartaoCredito(numerocartao, ListaCarrinho[idcarrinho - 1].idusuario, ListaCarrinho[idcarrinho - 1].itens.Sum(x => x.preco)))
+                SalvarLog(ListaCarrinho[idcarrinho - 1].idusuario, "COMPRA", DateTime.Now);
+            else
+                return Unauthorized();
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idusuario"></param>
+        /// <returns></returns>
         private bool AutorizacaoUsuario(long idusuario)
         {
             //Fazer requisição para API_AUTENTICACAO;
             return true;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numerocartao"></param>
+        /// <param name="idusuario"></param>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        private bool AutorizarCartaoCredito(int numerocartao, long idusuario, double valor)
+        {
+            //Fazer requisição para API_CARTAO_CREDITO;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idusuario"></param>
+        /// <param name="operacao"></param>
+        /// <param name="datahora"></param>
+        /// <returns></returns>
+        private bool SalvarLog(long idusuario, string operacao, DateTime datahora)
+        {
+            //Fazer requisição para API_AUDITORIA;
+            return true;
+        }
+
+
     }
 }

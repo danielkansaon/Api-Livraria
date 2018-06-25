@@ -10,6 +10,8 @@ namespace Api_Livraria.Models
         public string isbn { get; set; }
         public string nome { get; set; }
 
+        public double preco { get; set; }
+
         public List<comentario_model> comentarios { get; set; }
 
         public livro_model()
