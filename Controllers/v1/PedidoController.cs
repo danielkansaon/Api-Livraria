@@ -61,7 +61,7 @@ namespace Api_Livraria.Controllers.v1
         }
 
         /// <summary>
-        /// Retorn uma reserva já realizada
+        /// Retorna uma reserva já realizada
         /// </summary>
         /// <param name="idpedido">Id da reserva</param>
         /// <returns></returns>
