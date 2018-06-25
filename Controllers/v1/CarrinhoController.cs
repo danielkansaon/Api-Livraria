@@ -11,6 +11,7 @@ namespace Api_Livraria.Controllers.v1
     [Route("api/publico/v1/carrinho")]
     public class CarrinhoController : ControllerBase
     {
+        private const string API_AUTENTICACAO = " http://localhost:5000/publico/v1/credencial/";
         private static List<carrinho_model> _listaCarrinho;
         private static List<carrinho_model> ListaCarrinho
         {
@@ -33,8 +34,13 @@ namespace Api_Livraria.Controllers.v1
         [HttpPost, Route("")]
         public IActionResult Post([FromBody] usuario_model user)
         {
-            ListaCarrinho.Add(new carrinho_model() { idcarrinho = ListaCarrinho.Count + 1, idusuario = user.idusuario });
-            return Ok(ListaCarrinho.Count - 1);
+            if (AutorizacaoUsuario(user.idusuario))
+            {
+                ListaCarrinho.Add(new carrinho_model() { idcarrinho = ListaCarrinho.Count + 1, idusuario = user.idusuario });
+                return Ok(ListaCarrinho.Count - 1);
+            }
+
+            return Unauthorized();
         }
 
         /// <summary>
@@ -76,6 +82,12 @@ namespace Api_Livraria.Controllers.v1
                 return BadRequest("O parametro não representa um código de carrinho válido.");
 
             return Ok(ListaCarrinho[idcarrinho - 1].itens);
+        }
+
+        private bool AutorizacaoUsuario(long idusuario)
+        {
+            //Fazer requisição para API_AUTENTICACAO;
+            return true;
         }
     }
 }
